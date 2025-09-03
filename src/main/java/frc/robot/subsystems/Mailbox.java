@@ -5,25 +5,28 @@ import edu.wpi.first.wpilibj.Timer;
 import com.revrobotics.spark.SparkFlex; //download stuff
 
 public class Mailbox extends SubsystemBase{
-    private final Timer 
-    private final SparkFlex
-    //digital input object: sensorForCoral
+    private final Timer coralTimer; //timer obj
+    private final SparkFlex intakeVortex; //spark obj; speed go set yes eys
+    private final DigitalInput sensorForCoral; //dig inp obj
 }
 
-public Mailbox(){
-
+public Mailbox(){ //mailbox constructgefisdisdh
+    coralTimer = new Timer();
+    coralTimer.start(); //begin
+    intakeVortex = new SparkFlex(0, null);
+    sensorForCoral = new DigitalInput(0); //mailbox constant stuff here
 }
 
-public setSpeed(){
-
+public setSpeed(double voltage){
+    intakeVortex.setVoltage(voltage); // add "-"" for going other way
 }
 
 public brake(){
-
+    intakeVortex.set();
 }
 
 public detectorForCoral(){
-
+    return sensorForCoral.get();
 }
 
 public scorerCoral(){
