@@ -1,4 +1,4 @@
-//import MailboxConstants; needs to be made first bruh
+//import MailboxConstants; constants need be made first
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
@@ -8,7 +8,7 @@ public class Mailbox extends SubsystemBase{
     private final Timer coralTimer; //timer obj
     private final SparkFlex intakeVortex; //spark obj; speed go set yes eys
     private final DigitalInput sensorForCoral; //dig inp obj
-}
+
 
 public Mailbox(){ //mailbox constructgefisdisdh
     coralTimer = new Timer();
@@ -26,9 +26,17 @@ public brake(){
 }
 
 public detectorForCoral(){
-    return sensorForCoral.get();
+    return sensorForCoral.get(); //need ! (?)
 }
 
 public scorerCoral(){
+    if (detectorForCoral())
+        coralTimer.reset();
+    }
+    else {
+        return (coralTimer.get() /* <MailboxConstants.scoringLeewayTime) */) //leeway: period of time that has been lost/wasted
+
+    }
+
 
 }
