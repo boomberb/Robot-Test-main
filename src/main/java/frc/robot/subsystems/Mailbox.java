@@ -1,3 +1,5 @@
+package frc.robot.subsystems;
+
 //import MailboxConstants; constants need be made first
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -17,26 +19,26 @@ public Mailbox(){ //mailbox constructgefisdisdh
     sensorForCoral = new DigitalInput(0); //mailbox constant stuff here
 }
 
-public setSpeed(double voltage){
+public void setSpeed(double voltage){
     intakeVortex.setVoltage(voltage); // add "-"" for going other way
 }
 
-public brake(){
-    intakeVortex.set();
+public void brake(){
+    intakeVortex.set(0);
 }
 
-public detectorForCoral(){
+public boolean detectorForCoral(){
     return sensorForCoral.get(); //need ! (?)
 }
 
-public scorerCoral(){
+public void scorerCoral(){
     if (detectorForCoral())
         coralTimer.reset();
     }
-    else {
-        return (coralTimer.get() /* <MailboxConstants.scoringLeewayTime) */) //leeway: period of time that has been lost/wasted
+    /*else {
+        return (coralTimer.get() <MailboxConstants.scoringLeewayTime)) //leeway: period of time that has been lost/wasted
 
-    }
+    }*/
 
 
 }
