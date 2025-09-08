@@ -1,6 +1,6 @@
 package frc.robot.subsystems;
 
-//import MailboxConstants; constants need be made first
+import frc.robot.constants.MailboxConst;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
