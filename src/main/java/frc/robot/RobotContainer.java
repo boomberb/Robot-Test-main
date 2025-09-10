@@ -4,12 +4,14 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.constants.OperatorConst;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Mailbox;
+import frc.robot.commands.TeleopElevator;
+import frc.robot.commands.TeleopMailbox;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -18,6 +20,7 @@ import frc.robot.subsystems.Mailbox;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+  private final Joystick controller = new Joystick(OperatorConst.kDriverControllerPort);
   private final Elevator m_Elevator = new Elevator();
   private final Mailbox m_Mailbox = new Mailbox();
 

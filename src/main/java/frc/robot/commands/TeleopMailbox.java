@@ -3,16 +3,19 @@ package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.Mailbox;
 
-public class TeleopElevator extends Command {
-    private Elevator m_Elevator;
+/**
+ * Manual control of the mailbox [COMPLETE]
+ */
+public class TeleopMailbox extends Command {
+    private Mailbox m_Mailbox;
     private DoubleSupplier speedSup;
 
-    public TeleopElevator (Elevator m_Elevator, DoubleSupplier speedSup) {
-        this.m_Elevator = m_Elevator;
+    public TeleopMailbox (Mailbox m_Mailbox, DoubleSupplier speedSup) {
+        this.m_Mailbox = m_Mailbox;
         this.speedSup = speedSup;
-        addRequirements(m_Elevator);
+        addRequirements(m_Mailbox);
     }
 
     @Override
@@ -22,15 +25,16 @@ public class TeleopElevator extends Command {
 
     @Override
     public void execute() {
-        m_Elevator.setSpeed(speedSup.getAsDouble());
+        m_Mailbox.setSpeed(speedSup.getAsDouble());
     }
 
     @Override
     public boolean isFinished() {
         return false;
     }
+
     @Override
     public void end(boolean interrupted) {
-        m_Elevator.brake();
+        m_Mailbox.brake();
     }
 }

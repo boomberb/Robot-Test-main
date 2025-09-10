@@ -6,17 +6,43 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.constants.ElevatorConst;
 
 public class Elevator extends SubsystemBase {
-    public TalonFX elevatorMotor;
+    public TalonFX elevatorMotorOne;
+    public TalonFX elevatorMotorTwo;
 
     public Elevator () {
-        elevatorMotor = new TalonFX(ElevatorConst.elevatorMotorID);
+        elevatorMotorOne = new TalonFX(ElevatorConst.elevatorMotorID);
+        elevatorMotorTwo = new TalonFX(ElevatorConst.elevatorMotorID);
     }
 
     public void setSpeed (double output) {
-        elevatorMotor.setVoltage(output);
+        elevatorMotorOne.setVoltage(output);
+        elevatorMotorTwo.setVoltage(output);
     }
 
     public void brake () {
-        elevatorMotor.setVoltage(0);
+        elevatorMotorOne.setVoltage(0);
+        elevatorMotorTwo.setVoltage(0);
     }
+
+    /* ah*/ public void setPosition(){
+
+    }
+
+    /* ah2 */ public void setPositionInRotations(){
+
+    }
+ 
+    /* ah3 */ public double getElevatorPosition(){
+        return 0;
+    }
+
+    /* ah4 */ public double getElevatorSpeed(){
+        return 0;
+    }
+
+    /* ah5 */ public double checkElevatorMovement(){
+        return 0;
+    }
+
+
 }
