@@ -5,11 +5,14 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Elevator;
 
+/**
+ * Command that allows for manual control of the Elevator.
+ */
 public class TeleopElevator extends Command {
     private Elevator m_Elevator;
     private DoubleSupplier speedSup;
 
-    public TeleopElevator (Elevator m_Elevator, DoubleSupplier speedSup) {
+    public TeleopElevator(Elevator m_Elevator, DoubleSupplier speedSup) {
         this.m_Elevator = m_Elevator;
         this.speedSup = speedSup;
         addRequirements(m_Elevator);
@@ -29,6 +32,7 @@ public class TeleopElevator extends Command {
     public boolean isFinished() {
         return false;
     }
+
     @Override
     public void end(boolean interrupted) {
         m_Elevator.brake();

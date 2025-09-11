@@ -7,28 +7,27 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.constants.OperatorConst;
+import frc.robot.constants.OprConst;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Mailbox;
 import frc.robot.commands.TeleopElevator;
 import frc.robot.commands.TeleopMailbox;
 
-/**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and trigger mappings) should be declared here.
- */
 public class RobotContainer {
-  private final Joystick controller = new Joystick(OperatorConst.kDriverControllerPort);
+  private final Joystick controller = new Joystick(OprConst.kDriverControllerPort);
   private final Elevator m_Elevator = new Elevator();
   private final Mailbox m_Mailbox = new Mailbox();
 
   private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConst.kDriverControllerPort);
+      new CommandXboxController(OprConst.kDriverControllerPort);
 
   public RobotContainer() {
     configureBindings();
+
+    m_Mailbox.setDefaultCommand(new TeleopMailbox(m_Mailbox, () -> weapons.getRawAxis(mailbox))){
+
+    }
+    })
   }
 
   private void configureBindings() {

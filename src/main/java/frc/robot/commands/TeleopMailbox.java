@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Mailbox;
 
 /**
- * Manual control of the mailbox [COMPLETE]
+ * Command that allows for manual control of the mailbox.
  */
 public class TeleopMailbox extends Command {
     private Mailbox m_Mailbox;
     private DoubleSupplier speedSup;
 
-    public TeleopMailbox (Mailbox m_Mailbox, DoubleSupplier speedSup) {
+    public TeleopMailbox(Mailbox m_Mailbox, DoubleSupplier speedSup) {
         this.m_Mailbox = m_Mailbox;
         this.speedSup = speedSup;
         addRequirements(m_Mailbox);
