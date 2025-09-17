@@ -7,34 +7,53 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.constants.OprConst;
-import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.Mailbox;
-import frc.robot.commands.TeleopElevator;
-import frc.robot.commands.TeleopMailbox;
+
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 
 public class RobotContainer {
-  private final Joystick controller = new Joystick(OprConst.kDriverControllerPort);
+  
+  //Subsystems
   private final Elevator m_Elevator = new Elevator();
   private final Mailbox m_Mailbox = new Mailbox();
+  private final Payload m_Payload = new Payload();
 
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OprConst.kDriverControllerPort);
+  //Controllers
+  private final Joystick weapons = new Joystick(OprConst.kDriverControllerPort);
+
+  //Controls
+  private final int elevatorManual = XboxController.Axis.kLeftY.value;
+  private final int mailboxManual = XboxController.Axis.kRightY.value;
+
+  //Buttons
+  private final JoystickButton intake = new JoystickButton(weapons, XboxController.Button.kLeftBumper.value);
+  private final JoystickButton score = new JoystickButton(weapons, XboxController.Button.kRightBumper.value);
 
   public RobotContainer() {
+    m_Elevator.setDefaultCommand(
+      new TeleopElevator(
+        m_Elevator,
+        () -> -weapons.getRawAxis(elevatorManual)
+      )
+    );
+
+    m_Mailbox.setDefaultCommand(
+      new TeleopMailbox(
+        m_Mailbox,
+        () -> -weapons.getRawAxis(mailboxManual)
+      )
+    );
     configureBindings();
-
-    m_Mailbox.setDefaultCommand(new TeleopMailbox(m_Mailbox, () -> weapons.getRawAxis(mailbox))){
-
-    }
-    })
   }
 
   private void configureBindings() {
-
+    score.whileTrue(new AutoMailbox(m_Mailbox, true));
+    intake.whileTrue(new AutoMailbox(m_Mailbox, false));
   }
 
   public Command getAutonomousCommand() {
-    return null;
+    return new SelfDestruct(m_Payload);
   }
 }

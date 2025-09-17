@@ -27,7 +27,7 @@ public class Elevator extends SubsystemBase {
         elevatorMotorTwo.setVoltage(output);
     }
 
-    /**
+    /** [WIP]
      * Stops the motor.
      */
     public void brake () {
@@ -35,22 +35,21 @@ public class Elevator extends SubsystemBase {
         elevatorMotorTwo.setVoltage(0);
     }
 
-    /**
+    /** [WIP]
      * Sets the position of the Elevator to the given value.
      */
     public void setPosition(){
 
     }
 
-    /**
+    /** [WIP]
      * Sets the position of the Elevator to the given value in Rotations.
      */
     public void setPositionInRotations(){
 
     }
 
-    /**
-     * WIP
+    /** [WIP]
      * @param position
      * @return
      */
@@ -69,7 +68,7 @@ public class Elevator extends SubsystemBase {
 
     /**
      * Calculates the speed of the elevator.
-     * @param physicalSpeed If gear ratio should be considered.
+     * @param physicalSpeed Whether gear ratio should be considered.
      * @return Average speed of both motors.
      */
     public double getElevatorSpeed(boolean physicalSpeed) {

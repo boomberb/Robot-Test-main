@@ -1,7 +1,5 @@
 package frc.robot.constants;
 
-import java.lang.Thread.State;
-
 /**
  * Constants used for the Mailbox in subsystems and commands.
  */
