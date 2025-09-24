@@ -6,4 +6,5 @@ package frc.robot.constants;
 public final class OprConst {
     //IDs
     public static final int kDriverControllerPort = 0;
+    public static final int kWeaponsControllerPort = 1;
 }

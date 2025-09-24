@@ -5,8 +5,8 @@ package frc.robot.constants;
  */
 public final class MbxConst {
     //IDs
-    public final static int sparkMotorID = 0;
-    public final static int channelID = 0;
+    public final static int sparkMotorID = 62;
+    public final static int channelID = 9;
     
     //Control
     public final static double maxSpeed = 1;

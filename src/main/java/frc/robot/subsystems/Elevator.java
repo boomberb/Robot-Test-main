@@ -13,7 +13,7 @@ public class Elevator extends SubsystemBase {
     public TalonFX elevatorMotorOne;
     public TalonFX elevatorMotorTwo;
 
-    public Elevator () {
+    public Elevator() {
         elevatorMotorOne = new TalonFX(ElvConst.elevatorMotorID);
         elevatorMotorTwo = new TalonFX(ElvConst.elevatorMotorID);
     }
@@ -22,7 +22,7 @@ public class Elevator extends SubsystemBase {
      * Sets the speed of the Elevator motor to the given value.
      * @param output A decimal between -1 and 1 (inclusive) that indicates the % output of the motor.
      */
-    public void setSpeed (double output) {
+    public void setSpeed(double output) {
         elevatorMotorOne.setVoltage(output);
         elevatorMotorTwo.setVoltage(output);
     }
@@ -30,7 +30,7 @@ public class Elevator extends SubsystemBase {
     /** [WIP]
      * Stops the motor.
      */
-    public void brake () {
+    public void brake() {
         elevatorMotorOne.setVoltage(0);
         elevatorMotorTwo.setVoltage(0);
     }
@@ -38,14 +38,14 @@ public class Elevator extends SubsystemBase {
     /** [WIP]
      * Sets the position of the Elevator to the given value.
      */
-    public void setPosition(){
+    public void setPosition() {
 
     }
 
     /** [WIP]
      * Sets the position of the Elevator to the given value in Rotations.
      */
-    public void setPositionInRotations(){
+    public void setPositionInRotations() {
 
     }
 
@@ -53,7 +53,7 @@ public class Elevator extends SubsystemBase {
      * @param position
      * @return
      */
-    public double getElevatorPosition(boolean position){
+    public double getElevatorPosition(boolean position) {
         double motorOnePosition = Units.rotationsToDegrees(elevatorMotorOne.getPosition().getValueAsDouble());
         double motorTwoPosition = Units.rotationsToDegrees(elevatorMotorTwo.getPosition().getValueAsDouble());
         double averageMotorPosition = (motorOnePosition + motorTwoPosition) / 2;
@@ -81,7 +81,7 @@ public class Elevator extends SubsystemBase {
         }
     }
 
-    public double checkElevatorMovement(double newSpeed){
+    public double checkElevatorMovement(double newSpeed) {
         return 0;
     }
 
