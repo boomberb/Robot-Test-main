@@ -1,20 +1,17 @@
 package frc.robot.commands;
 
-import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Elevator;
 
 /**
- * Command that allows for manual control of the Elevator motors.
+ * Command that allows for precise movement of the Elevator to a predetermined position.
  */
-public class TeleopElevator extends Command {
+public class AutoElevator extends Command {
     private Elevator m_Elevator;
-    private DoubleSupplier speedSup;
 
-    public TeleopElevator(Elevator m_Elevator, DoubleSupplier speedSup) {
+    public AutoElevator(Elevator m_Elevator) {
         this.m_Elevator = m_Elevator;
-        this.speedSup = speedSup;
+
         addRequirements(m_Elevator);
     }
 
@@ -25,16 +22,16 @@ public class TeleopElevator extends Command {
 
     @Override
     public void execute() {
-        m_Elevator.setSpeed(speedSup.getAsDouble());
+        
     }
 
     @Override
     public boolean isFinished() {
-        return false;
+        return true;
     }
 
     @Override
     public void end(boolean interrupted) {
-        m_Elevator.brake();
+        
     }
 }

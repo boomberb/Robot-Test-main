@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Mailbox;
 
 /**
- * Command that allows for manual control of the mailbox.
+ * Command that allows for manual control of the Mailbox motors.
  */
 public class TeleopMailbox extends Command {
     private Mailbox m_Mailbox;

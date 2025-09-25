@@ -7,7 +7,9 @@ import edu.wpi.first.wpilibj.Timer;
 import com.revrobotics.spark.SparkFlex; //download stuff
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
-/**Represents the Mailbox subsystem and its functions.*/
+/**
+ * Represents the Mailbox subsystem and its possible functions.
+ */
 public class Mailbox extends SubsystemBase {
     
     private final Timer coralTimer; //timer obj

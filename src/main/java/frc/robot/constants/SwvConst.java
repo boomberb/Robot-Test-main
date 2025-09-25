@@ -13,6 +13,9 @@ import edu.wpi.first.math.util.Units;
 import frc.lib.util.COTSTalonFXSwerveConstants;
 import frc.lib.util.SwerveModuleConstants;
 
+/**
+ * Stolen from Evan Wang.
+ */
 public final class SwvConst {
     public static final double stickDeadband = 0.1;
 

@@ -1,20 +1,21 @@
 package frc.robot.subsystems;
 
-import frc.robot.constants.SwvConst;
+import frc.robot.SwerveModule;
+import frc.robot.constants. SwvConst;
+
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
-import com.ctre.phoenix6.swerve.SwerveModule;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.config.RobotConfig;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
-import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -31,17 +32,17 @@ public class Swerve extends SubsystemBase {
      * @return A new Swerve subsystem object
      */
     public Swerve() {
-        if (SwvConst.usesCANivore) {
-            gyro = new Pigeon2(SwvConst.pigeonID, SwvConst.swerveCANivoreName);
+        if ( SwvConst.usesCANivore) {
+            gyro = new Pigeon2( SwvConst.pigeonID,  SwvConst.swerveCANivoreName);
             gyro.getConfigurator().apply(new Pigeon2Configuration());
             gyro.setYaw(0); // The robot should move in the direction the front wheels face when the robot is first booted up
 
             /* SwerveModule Objects */
             mSwerveMods = new SwerveModule[] { 
-                new SwerveModule(0, SwvConst.Mod0.constants.st.swerveCANivoreName),
-                new SwerveModule(1, SwvConst.Mod1.constants.st.swerveCANivoreName),
-                new SwerveModule(2, SwvConst.Mod2.constants.st.swerveCANivoreName),
-                new SwerveModule(3, SwvConst.Mod3.constants.st.swerveCANivoreName)
+                new SwerveModule(0, SwvConst.Mod0.constants, SwvConst.swerveCANivoreName),
+                new SwerveModule(1, SwvConst.Mod1.constants, SwvConst.swerveCANivoreName),
+                new SwerveModule(2, SwvConst.Mod2.constants, SwvConst.swerveCANivoreName),
+                new SwerveModule(3, SwvConst.Mod3.constants, SwvConst.swerveCANivoreName)
             };
         } else {
             gyro = new Pigeon2(SwvConst.pigeonID);
@@ -50,7 +51,11 @@ public class Swerve extends SubsystemBase {
 
             /* SwerveModule Objects */
             mSwerveMods = new SwerveModule[] { 
-                new SwerveModule(0, SwvConst.Mod0.SwvCo.           new SwerveModule(1, SwvConst.Mod1.SwvCo.           new SwerveModule(2, SwvConst.Mod2.SwvCo.           new SwerveModule(3, SwvConst.Mod3.SwvC.      };
+                new SwerveModule(0, SwvConst.Mod0.constants),
+                new SwerveModule(1, SwvConst.Mod1.constants),
+                new SwerveModule(2, SwvConst.Mod2.constants),
+                new SwerveModule(3, SwvConst.Mod3.constants)
+            };
         }
 
         /* Swerve Drive Odometry (or, in the future, perhaps a Swerve Pose Estimator)
@@ -74,7 +79,7 @@ public class Swerve extends SubsystemBase {
                 this::setPose, // Method to reset odometry (will be called if your auto has a starting pose)
                 this::getChassisSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
                 this::driveRobotRelative, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
-                SwvConst.rveSwvConst.nnerConfig, // Other configuration values from the SwvConst.f this project
+                SwvConst.AutoSwerveConstants.pathPlannerConfig, // Other configuration values from the Constants class of this project
                 config, // Load the RobotConfig from the GUI settings.
                 () -> {
                     // Boolean supplier that controls when the path will be mirrored for the red alliance
@@ -222,6 +227,4 @@ public class Swerve extends SubsystemBase {
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);    
         }
     }
-}
-
 }
