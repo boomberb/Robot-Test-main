@@ -97,6 +97,7 @@ public class Swerve extends SubsystemBase {
             // Handle exception as needed
             e.printStackTrace();
         }
+        System.out.println("Swerve subsystem loaded.");
     }
 
     /**

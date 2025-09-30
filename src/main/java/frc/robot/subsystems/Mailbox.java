@@ -21,6 +21,7 @@ public class Mailbox extends SubsystemBase {
         coralTimer.start(); //begin
         intakeVortex = new SparkFlex(MbxConst.sparkMotorID, MotorType.kBrushless); //idk motor type
         coralSensor = new DigitalInput(MbxConst.channelID);
+        System.out.println("Mailbox subsystem loaded.");
     }
 
     /**

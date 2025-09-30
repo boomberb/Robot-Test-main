@@ -19,7 +19,7 @@ public class AutoMailbox extends Command {
 
     @Override
     public void initialize() {
-        
+        System.out.println("Executing [AutoMailbox] command.");
     }
 
     @Override
@@ -56,5 +56,10 @@ public class AutoMailbox extends Command {
     @Override
     public void end(boolean interrupted) {
         m_Mailbox.brake();
+        if (interrupted) {
+            System.out.println("!WARNING!\nCommand failure!");
+        } else {
+            System.out.println("Successfuly completed command.");
+        }
     }
 }

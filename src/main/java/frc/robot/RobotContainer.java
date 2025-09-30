@@ -11,44 +11,44 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.AutoMailbox;
-import frc.robot.commands.SelfDestruct;
-import frc.robot.commands.TeleopMailbox;
-import frc.robot.commands.TeleopSwerve;
+import frc.robot.constants.ElvConst;
 import frc.robot.constants.OprConst;
-//import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.Mailbox;
-import frc.robot.subsystems.Payload;
-import frc.robot.subsystems.Swerve;
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 
 public class RobotContainer {
   
   //Subsystems
-  //private final Elevator m_Elevator = new Elevator();
+  private final Elevator m_Elevator = new Elevator();
   private final Mailbox m_Mailbox = new Mailbox();
   private final Payload m_Payload = new Payload();
   private final Swerve s_Swerve = new Swerve();
 
-  //Controllers
+  // Controllers
   private final Joystick driver = new Joystick(OprConst.kDriverControllerPort);
   private final Joystick weapons = new Joystick(OprConst.kDriverControllerPort);
 
-  //Drive Controls
+  // Drive Controls
   private final int translationAxis = XboxController.Axis.kLeftY.value; // Forward and backward controls
   private final int strafeAxis = XboxController.Axis.kLeftX.value; // Right and left controls
   private final int rotationAxis = XboxController.Axis.kRightX.value; // Rotation controls
 
-  //Drive Buttons
+  // Drive Buttons
   private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
   private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
-  //Weapon Controls
-  //private final int elevatorManual = XboxController.Axis.kLeftY.value;
+  // Weapon Controls
+  private final int elevatorManual = XboxController.Axis.kLeftY.value;
   private final int mailboxManual = XboxController.Axis.kRightY.value;
 
-  //Weapon Buttons
+  // Weapon Buttons
   private final JoystickButton intake = new JoystickButton(weapons, XboxController.Button.kLeftBumper.value);
   private final JoystickButton score = new JoystickButton(weapons, XboxController.Button.kRightBumper.value);
+
+  private final JoystickButton elevatePtOne = new JoystickButton(weapons, XboxController.Button.kB.value);
+  private final JoystickButton elevatePtTwo = new JoystickButton(weapons, XboxController.Button.kX.value);
+  private final JoystickButton elevatePtThree = new JoystickButton(weapons, XboxController.Button.kY.value);
+
   private final JoystickButton detonate = new JoystickButton(weapons, XboxController.Button.kB.value);
 
   public RobotContainer() {
@@ -62,12 +62,12 @@ public class RobotContainer {
                 )
             );
     
-    // m_Elevator.setDefaultCommand(
-    //   new TeleopElevator(
-    //     m_Elevator,
-    //     () -> -weapons.getRawAxis(elevatorManual)
-    //   )
-    // );
+    m_Elevator.setDefaultCommand(
+    new TeleopElevator(
+        m_Elevator,
+        () -> -weapons.getRawAxis(elevatorManual)
+      )
+    );
 
     m_Mailbox.setDefaultCommand(
       new TeleopMailbox(
@@ -87,6 +87,11 @@ public class RobotContainer {
     // Weapons Buttons
     score.whileTrue(new AutoMailbox(m_Mailbox, true));
     intake.whileTrue(new AutoMailbox(m_Mailbox, false));
+
+    elevatePtOne.onTrue(new AutoElevator(m_Elevator, ElvConst.heightOne));
+    elevatePtTwo.onTrue(new AutoElevator(m_Elevator, ElvConst.heightTwo));
+    elevatePtThree.onTrue(new AutoElevator(m_Elevator, ElvConst.heightThree));
+
     detonate.onTrue(new SelfDestruct(m_Payload));
   }
 

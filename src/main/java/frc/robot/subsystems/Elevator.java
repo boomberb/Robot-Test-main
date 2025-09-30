@@ -17,6 +17,8 @@ public class Elevator extends SubsystemBase {
     public Elevator() {
         elevatorMotorOne = new TalonFX(ElvConst.motorID, SwvConst.swerveCANivoreName);
         elevatorMotorTwo = new TalonFX(ElvConst.motorID, SwvConst.swerveCANivoreName);
+        setPositionInRotations(ElvConst.startingHeight);
+        System.out.println("Elevator subsystem loaded.");
     }
 
      /**
@@ -32,11 +34,11 @@ public class Elevator extends SubsystemBase {
      * @param physical If the value returned should account for gear ratio.
      * @return The average position of the elevator motors.
      */
-    public double getElevatorPosition(boolean physical) {
+    public double getElevatorPosition(boolean physicalPosition) {
         double motorOnePosition = Units.rotationsToDegrees(elevatorMotorOne.getPosition().getValueAsDouble());
         double motorTwoPosition = Units.rotationsToDegrees(elevatorMotorTwo.getPosition().getValueAsDouble());
         double averageMotorPosition = (motorOnePosition + motorTwoPosition) / 2;
-        if (physical){
+        if (physicalPosition){
             return averageMotorPosition / ElvConst.gearRatio;
         } else {
             return averageMotorPosition;
@@ -45,7 +47,7 @@ public class Elevator extends SubsystemBase {
 
     /**
      * Calculates the speed of the elevator.
-     * @param physicalSpeed Whether gear ratio should be considered.
+     * @param physicalSpeed If the value returned should account for gear ratio.
      * @return Average speed of both motors.
      */
     public double getElevatorSpeed(boolean physicalSpeed) {
@@ -59,29 +61,22 @@ public class Elevator extends SubsystemBase {
     }
 
     /**
+     * Checks if the elevator is within bounds.
      * @param output A decimal between -1 and 1 (inclusive) that indicates the % output of the motor.
-     * @return If the elevator is traveling within limits.
+     * @return If the elevator is traveling within bounds.
      */
     public boolean checkElevatorMovement(double output) {
-        if (getElevatorPosition(false) <= ElvConst.elevatorLowerBound) {
-            if (output >= 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } else if (getElevatorPosition(false) >= ElvConst.elevatorUpperBound) {
-            if (output < 0) {
-                return true;
-            } else {
-                return false;
-            }
+        if (getElevatorPosition(false) <= ElvConst.lowerBound) {
+            return output >= 0; // Checks if the elevator is at or past lower bounds, then checks if the elevator will move further past lower bounds.
+        } else if (getElevatorPosition(false) >= ElvConst.upperBound) {
+            return output < 0; // Checks if the elevator is at or past upper bounds, then checks if the elevator will move further past upper bounds.
         } else {
-            return true;
+            return true; // If not at or past the upper or lower bounds, then simply returns true.
         }
     }
 
     /**
-     * Sets the speed of the Elevator motor to the given value.
+     * Sets the speed of the Elevator motor to the given value. Will not operate if the elevator will move out of bounds.
      * @param output A decimal between -1 and 1 (inclusive) that indicates the % output of the motor.
      */
     public void setSpeed(double output) {
