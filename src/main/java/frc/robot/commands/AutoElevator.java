@@ -33,7 +33,6 @@ public class AutoElevator extends Command {
     @Override
     public void execute() {
         m_Elevator.setSpeed(pid.calculate(m_Elevator.getElevatorPosition(true), angleSetPoint) + feedforward.calculate(ElvConst.setpointVelocity));
-        System.out.println(pid.calculate(m_Elevator.getElevatorPosition(true), angleSetPoint) + feedforward.calculate(ElvConst.setpointVelocity));
     }
 
     @Override

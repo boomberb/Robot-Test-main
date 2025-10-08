@@ -90,7 +90,7 @@ public class Elevator extends SubsystemBase {
 
     /**
      * Sets the position of the Elevator to the given value in Degrees.
-     * @param newPosition The new position of the elevator.
+     * @param newPosition The new position for the elevator.
      */
     public void setPosition(double newPosition) {
         elevatorMotorOne.setPosition(Units.rotationsToDegrees(newPosition));
@@ -99,7 +99,7 @@ public class Elevator extends SubsystemBase {
 
     /**
      * Sets the position of the Elevator to the given value in Rotations.
-     * @param newPosition The desired position for the elevator.
+     * @param newPosition The new position for the elevator.
      */
     public void setPositionInRotations(double newPosition) {
         elevatorMotorOne.setPosition(newPosition);

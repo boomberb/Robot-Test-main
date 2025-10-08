@@ -30,8 +30,8 @@ public final class ElvConst {
     public static final double kG = 0;
     public static final double kV = 0;
     public static final double kA = 0;
-    public static final double maxVelocity = 0;
-    public static final double maxAcceleration = 0;
+    public static final double maxVelocity = 10;
+    public static final double maxAcceleration = 10;
 
     // Feedforward
     public static final double setpointVelocity = 0;
